@@ -4,6 +4,8 @@ import java.lang.ref.Cleaner.Cleanable;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,13 +56,13 @@ public class ClienteController {
 	
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
-	public Cliente adicionar(@RequestBody Cliente cliente) { //RequestBody: vincula o parametro do metodo com o corpo da requisicao
+	public Cliente adicionar(@Valid @RequestBody Cliente cliente) { //RequestBody: vincula o parametro do metodo com o corpo da requisicao
 		
 		return clienteRepository.save(cliente);
 	}
 	
 	@PutMapping("/{clienteId}")
-	public ResponseEntity<Cliente> atualizar(@PathVariable Long clienteId, @RequestBody Cliente cliente) {
+	public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId, @RequestBody Cliente cliente) { //Valid: realiza a validacao na entrada do metodo
 		if (!clienteRepository.existsById(clienteId)) {
 			return ResponseEntity.notFound().build();
 		} else {
