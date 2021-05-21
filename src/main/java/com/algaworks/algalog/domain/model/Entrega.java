@@ -11,7 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
 
+import com.algaworks.algalog.domain.ValidationGroups;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -30,12 +35,18 @@ public class Entrega {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Valid //Aplica a validacao em cascata
+	@ConvertGroup(from = Default.class, to = ValidationGroups.ClienteId.class) //Aplica a validacao de ClienteId somente nos atributos anotados com esse grupo
+	@NotNull
 	@ManyToOne
 	private Cliente cliente;
 	
+	@NotNull
+	@Valid //Aplica a validacao em cascata
 	@Embedded //Anotacao que indica que os campos de destinatario estarao presentes ta tabela Entrega do banco de dados 
 	private Destinatario destinatario;
 	
+	@NotNull
 	private BigDecimal taxa;
 	
 	@JsonProperty(access = Access.READ_ONLY)
