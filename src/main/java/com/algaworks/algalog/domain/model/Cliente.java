@@ -22,7 +22,6 @@ import lombok.Setter;
 @Entity
 public class Cliente {
 	
-	@NotNull(groups = ValidationGroups.ClienteId.class)
 	@EqualsAndHashCode.Include
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//Identity: estrategia padrao de incrementacao usada pelo banco de dados
