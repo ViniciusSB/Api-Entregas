@@ -1,4 +1,4 @@
-package com.algaworks.algalog.api.input;
+package com.algaworks.algalog.api.model.input;
 
 import java.math.BigDecimal;
 
@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class EntregaInputModel {
+public class EntregaInput {
 	
 	@Valid
 	@NotNull
